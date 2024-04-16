@@ -37,3 +37,4 @@ C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net6.0-windows\ref
 C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net6.0-windows\Particle_Reader.pdb
 C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net6.0-windows\Particle_Reader.genruntimeconfig.cache
 C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net6.0-windows\ref\Particle_Reader.dll
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net6.0-windows\Particle_Reader.View.Report_View.resources

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "8lIBe3N/0pkjrjk96ctefURwdlY5UBlRDdhq6te5p9aj46eX60462gZ78m/7tZ6EI0LY7bL+CkbaYEjUZmoP3A==",
+  "dgSpecHash": "kNmJalp8ZkB2ZKLMntIBCsYhBabOM5gfvYpjEPWSVa9RPw0QT48TcEYlJF8JzFoWTE8Yj3QxvUa0jBno5tEmsg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Omar Sotomayor\\source\\repos\\ParticleReader\\Particle_Reader.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Omar Sotomayor\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Omar Sotomayor\\.nuget\\packages\\epplus\\7.1.0\\epplus.7.1.0.nupkg.sha512",
     "C:\\Users\\Omar Sotomayor\\.nuget\\packages\\epplus.interfaces\\6.1.1\\epplus.interfaces.6.1.1.nupkg.sha512",
     "C:\\Users\\Omar Sotomayor\\.nuget\\packages\\epplus.system.drawing\\6.1.1\\epplus.system.drawing.6.1.1.nupkg.sha512",

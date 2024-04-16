@@ -21,7 +21,7 @@ namespace ParticleReader
             this.sampleInformation = sampleInformation;
 
             particleDataView = new Particle_Data(particleData);
-            meshSelectionView = new Mesh_Selection(particleData);           
+            meshSelectionView = new Mesh_Selection(particleData, sampleInformation);           
 
             Pnl_Load_Data.Controls.Add(particleDataView);            
         }
@@ -31,7 +31,6 @@ namespace ParticleReader
             particleDataView.Width = Pnl_Load_Data.Width;
             particleDataView.Height = Pnl_Load_Data.Height;
         }
-
         private void Pnl_Mesh_Selection_Resize(object sender, EventArgs e)
         {
             meshSelectionView.Width = Pnl_Mesh_Selection.Width;
@@ -79,7 +78,9 @@ namespace ParticleReader
 
             DataTable astm95Information = meshSelectionView.getDataOfASTM95();
             DataTable singleApertureInformation = meshSelectionView.getDataOfSingleAperture();
-            accumulatedifferential = new Accumulated_Differential(particleData, astm95Information, singleApertureInformation);
+            DataTable sampleInformation = meshSelectionView.getSampleInformation();
+
+            accumulatedifferential = new Accumulated_Differential(particleData, astm95Information, singleApertureInformation, sampleInformation);
             
             Pnl_Accumulated_Differential.Controls.Add(accumulatedifferential);
 

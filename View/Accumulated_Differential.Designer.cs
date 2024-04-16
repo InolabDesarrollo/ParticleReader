@@ -44,6 +44,7 @@
             label1 = new Label();
             Lbl_Differential = new Label();
             Lbl_Diferential = new Label();
+            Btn_Generate_Report = new Button();
             ((System.ComponentModel.ISupportInitialize)Dgv_ASTM95_Accumulated).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Dgv_ASTM95_Differential).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Dgv_Single_Aperture_Accumulated).BeginInit();
@@ -200,11 +201,23 @@
             Lbl_Diferential.TabIndex = 14;
             Lbl_Diferential.Text = "Diferencial";
             // 
+            // Btn_Generate_Report
+            // 
+            Btn_Generate_Report.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Generate_Report.Location = new Point(494, 391);
+            Btn_Generate_Report.Name = "Btn_Generate_Report";
+            Btn_Generate_Report.Size = new Size(127, 37);
+            Btn_Generate_Report.TabIndex = 15;
+            Btn_Generate_Report.Text = "Generate Report";
+            Btn_Generate_Report.UseVisualStyleBackColor = true;
+            Btn_Generate_Report.Click += Btn_Generate_Report_Click;
+            // 
             // Accumulated_Differential
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 112, 192);
+            Controls.Add(Btn_Generate_Report);
             Controls.Add(Lbl_Diferential);
             Controls.Add(Lbl_Differential);
             Controls.Add(label1);
@@ -245,5 +258,6 @@
         private Label label1;
         private Label Lbl_Differential;
         private Label Lbl_Diferential;
+        private Button Btn_Generate_Report;
     }
 }

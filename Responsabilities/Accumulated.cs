@@ -15,6 +15,15 @@ namespace ParticleReader.Responsabilities
         public Accumulated(DataTable particleData) {
             this.particleData = particleData;
         }
+
+        public void addColumnToDatagridView(string headerText, DataGridView dataGridView)
+        {
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            column.HeaderText = headerText;
+            column.Width = 100;
+            dataGridView.Columns.Add(column);
+        }
+
         public double getAccumulatedValueRight(int detectorValue, int columnToSerchValue)
         {
             double cellValue;
@@ -45,6 +54,7 @@ namespace ParticleReader.Responsabilities
         {
             double auxiliarValue = Math.Pow(10, 2);
             return (Math.Truncate(number * auxiliarValue)/ auxiliarValue);
-        }        
+        }
+        
     }
 }

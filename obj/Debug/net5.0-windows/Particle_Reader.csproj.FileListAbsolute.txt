@@ -1,0 +1,12 @@
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.csproj.AssemblyReference.cache
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\ParticleReader.View.Accumulated_Differential.resources
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\ParticleReader.View.LoadFile.resources
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\ParticleReader.MainMenu.resources
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\ParticleReader.View.Mesh_Selection.resources
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\ParticleReader.View.Particle_Data.resources
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.View.Report_View.resources
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.csproj.GenerateResource.cache
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.AssemblyInfoInputs.cache
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.AssemblyInfo.cs
+C:\Users\Omar Sotomayor\source\repos\ParticleReader\obj\Debug\net5.0-windows\Particle_Reader.csproj.CoreCompileInputs.cache

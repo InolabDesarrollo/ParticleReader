@@ -16,16 +16,18 @@ namespace ParticleReader.View
     public partial class Mesh_Selection : UserControl
     {
         private readonly DataTable particleData;
+        private readonly DataTable sampleInformation;
         private DataTable referenceData;
         private ManageData manageData;
         private Responsabilities.Particle_Data particle_data;
 
         public static DataTable astm95Information;
         public static DataTable singleApertureInformation;
-        public Mesh_Selection(DataTable particleData)
+        public Mesh_Selection(DataTable particleData, DataTable sampleInformation)
         {
             InitializeComponent();
             this.particleData = particleData;
+            this.sampleInformation = sampleInformation;
             manageData = new ManageData();
             referenceData = manageData.createDgvToleranceTableReference();
             particle_data = new Responsabilities.Particle_Data(particleData);
@@ -83,7 +85,7 @@ namespace ParticleReader.View
             Selected_Meshes_ASTM95.Rows.Clear();
             Selected_Meshes_Single_Aperture.Rows.Clear();
             singleApertureInformation.Rows.Clear();
-            astm95Information.Rows.Clear(); 
+            astm95Information.Rows.Clear();
         }
 
         public DataTable getDataOfSingleAperture()
@@ -94,6 +96,11 @@ namespace ParticleReader.View
         public DataTable getDataOfASTM95()
         {
             return astm95Information;
+        }
+
+        public DataTable getSampleInformation()
+        {
+            return sampleInformation;
         }
 
     }

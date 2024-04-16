@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,17 +15,18 @@ namespace ParticleReader.View
 {
     public partial class Accumulated_Differential : UserControl
     {
-        private readonly DataTable particleData;
         private readonly DataTable astm95Information;
         private readonly DataTable singleApertureInformation;
+        private readonly DataTable sampleInformation;
+
         private int numberOfRuns;
         private Accumulated accumulated;
-        public Accumulated_Differential(DataTable particleData, DataTable astm95Information, DataTable singleApertureInformation)
+        public Accumulated_Differential(DataTable particleData, DataTable astm95Information, DataTable singleApertureInformation, DataTable sampleInformation)
         {
             InitializeComponent();
-            this.particleData = particleData;
             this.astm95Information = astm95Information;
             this.singleApertureInformation = singleApertureInformation;
+            this.sampleInformation = sampleInformation;
             numberOfRuns = this.checkNumberOfRuns(particleData);
 
             accumulated = new Accumulated(particleData);
@@ -107,9 +109,9 @@ namespace ParticleReader.View
                 cumulated = accumulated.getAccumulatedValueRight(detectorNumber, 2);
 
                 dataGridViewToAddValues.Rows.Add();
-                dataGridViewToAddValues.Rows[i+1].Cells[0].Value = information.Rows[i][0];
-                dataGridViewToAddValues.Rows[i+1].Cells[1].Value = information.Rows[i][1];
-                dataGridViewToAddValues.Rows[i+1].Cells[2].Value = cumulated;
+                dataGridViewToAddValues.Rows[i + 1].Cells[0].Value = information.Rows[i][0];
+                dataGridViewToAddValues.Rows[i + 1].Cells[1].Value = information.Rows[i][1];
+                dataGridViewToAddValues.Rows[i + 1].Cells[2].Value = cumulated;
             }
         }
 
@@ -138,14 +140,14 @@ namespace ParticleReader.View
             dataGridViewToAddValues.Rows.Add();
             dataGridViewToAddValues.Rows[0].Cells[3].Value = 0;
 
-            for (int i = 0; i < information.Rows.Count; i++)
+            for(int i = 0; i < information.Rows.Count; i++)
             {
                 detectorNumber = Convert.ToInt32(information.Rows[i][2].ToString());
                 cumulated = accumulated.getAccumulatedValueRight(detectorNumber, 3);
 
                 dataGridViewToAddValues.Rows.Add();
                 dataGridViewToAddValues.Rows[i + 1].Cells[3].Value = cumulated;
-            }           
+            }
         }
 
         private void addAcummulativeToLeftRunTwo(DataTable information, DataGridView dataGridViewToAddValues, int columnToAddValue)
@@ -160,7 +162,7 @@ namespace ParticleReader.View
                 cumulated = accumulated.getAccumulatedValueLeft(detectorNumber, 3);
 
                 dataGridViewToAddValues.Rows.Add();
-                dataGridViewToAddValues.Rows[i+1].Cells[columnToAddValue].Value = cumulated;
+                dataGridViewToAddValues.Rows[i + 1].Cells[columnToAddValue].Value = cumulated;
             }
             dataGridViewToAddValues.Rows[0].Cells[columnToAddValue].Value = 0;
         }
@@ -210,7 +212,7 @@ namespace ParticleReader.View
 
         private void fillDifferentialValues()
         {
-            ManageData data = new ManageData();    
+            ManageData data = new ManageData();
             DataTable accumulatedValuesASTM95 = data.convertDataGridViewToTable(Dgv_ASTM95_Accumulated);
             DataTable accumulatedValuesSingleAperture = data.convertDataGridViewToTable(Dgv_Single_Aperture_Accumulated);
 
@@ -227,5 +229,33 @@ namespace ParticleReader.View
             data.addDataTableToDataGridView(differentialSingleAperture, Dgv_Single_Aperture_Differential);
         }
 
+        private void Btn_Generate_Report_Click(object sender, EventArgs e)
+        {
+            DataTable sampleInformationForReport = this.serchInformationOfRuns();
+            
+        }
+
+        private DataTable serchInformationOfRuns()
+        {
+            string[] valuesToSerch = { "Name", "Sample Date", "User", "Device", "Sample ID", "Group ID" };
+            DataTable information = new DataTable();
+            information.Columns.Add(new DataColumn("Title", typeof(string)));
+            information.Columns.Add(new DataColumn("Value", typeof(string)));
+
+            string cellValue = "";
+            int index = 0;
+            for (int i=0; i< sampleInformation.Rows.Count; i++)
+            {
+                cellValue = sampleInformation.Rows[i][1].ToString();
+                if( valuesToSerch.Contains(cellValue))
+                {
+                    information.Rows.Add();
+                    information.Rows[index]["Title"] = sampleInformation.Rows[i][1].ToString();
+                    information.Rows[index]["Value"] = sampleInformation.Rows[i][2].ToString();
+                    index++;
+                }
+            }
+            return information;
+        }
     }
 }

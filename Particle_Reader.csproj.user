@@ -16,5 +16,8 @@
     <Compile Update="View\Particle_Data.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="View\Report_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
