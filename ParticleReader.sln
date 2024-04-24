@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Particle_Reader", "Particle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test_Proyect", "..\Test_Proyect\Test_Proyect.csproj", "{005CDBAA-1539-411C-B2AB-85A1B111FA37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "..\Reports\View.csproj", "{27C7BD03-A49E-402C-BD92-C2C7B5AEDAC9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{005CDBAA-1539-411C-B2AB-85A1B111FA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005CDBAA-1539-411C-B2AB-85A1B111FA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005CDBAA-1539-411C-B2AB-85A1B111FA37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27C7BD03-A49E-402C-BD92-C2C7B5AEDAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27C7BD03-A49E-402C-BD92-C2C7B5AEDAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27C7BD03-A49E-402C-BD92-C2C7B5AEDAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27C7BD03-A49E-402C-BD92-C2C7B5AEDAC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

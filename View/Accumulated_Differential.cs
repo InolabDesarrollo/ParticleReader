@@ -1,11 +1,16 @@
 ﻿using Microsoft.VisualBasic;
+using Particle_Reader.Model;
+using Particle_Reader.Responsabilities;
+using Particle_Reader.View;
 using ParticleReader.Responsabilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +26,8 @@ namespace ParticleReader.View
 
         private int numberOfRuns;
         private Accumulated accumulated;
+        private DataTable differentialASTM95;
+        private DataTable differentialSingleAperture;
         public Accumulated_Differential(DataTable particleData, DataTable astm95Information, DataTable singleApertureInformation, DataTable sampleInformation)
         {
             InitializeComponent();
@@ -96,8 +103,8 @@ namespace ParticleReader.View
 
         private void addAcummulativeToRightRunOne(DataTable information, DataGridView dataGridViewToAddValues)
         {
-            double cumulated = 0;
-            int detectorNumber = 0;
+            double cumulated;
+            int detectorNumber;
             this.addColumnToDatagridView("Run_1 Cumulatives <", dataGridViewToAddValues);
             dataGridViewToAddValues.Rows.Add();
             dataGridViewToAddValues.Rows[0].Cells[1].Value = 999;
@@ -117,8 +124,8 @@ namespace ParticleReader.View
 
         private void addAcummulativeToLeftRunOne(DataTable information, DataGridView dataGridViewToAddValues, int columnToAddValue)
         {
-            double cumulated = 0;
-            int detectorNumber = 0;
+            double cumulated;
+            int detectorNumber;
             this.addColumnToDatagridView("Run_1 Cumulatives >", dataGridViewToAddValues);
 
             for (int i = 0; i < information.Rows.Count; i++)
@@ -134,8 +141,8 @@ namespace ParticleReader.View
 
         private void addAcummulativeToRightRunTwo(DataTable information, DataGridView dataGridViewToAddValues)
         {
-            double cumulated = 0;
-            int detectorNumber = 0;
+            double cumulated;
+            int detectorNumber;
             this.addColumnToDatagridView("Run_2 Cumulatives <", dataGridViewToAddValues);
             dataGridViewToAddValues.Rows.Add();
             dataGridViewToAddValues.Rows[0].Cells[3].Value = 0;
@@ -152,8 +159,8 @@ namespace ParticleReader.View
 
         private void addAcummulativeToLeftRunTwo(DataTable information, DataGridView dataGridViewToAddValues, int columnToAddValue)
         {
-            double cumulated = 0;
-            int detectorNumber = 0;
+            double cumulated;
+            int detectorNumber;
             this.addColumnToDatagridView("Run_2 Cumulatives >", dataGridViewToAddValues);
 
             for (int i = 0; i < information.Rows.Count; i++)
@@ -169,8 +176,8 @@ namespace ParticleReader.View
 
         private void addAcummulativeToRightRunThree(DataTable information, DataGridView dataGridViewToAddValues)
         {
-            double cumulated = 0;
-            int detectorNumber = 0;
+            double cumulated;
+            int detectorNumber;
             this.addColumnToDatagridView("Run_3 Cumulatives <", dataGridViewToAddValues);
             dataGridViewToAddValues.Rows.Add();
             dataGridViewToAddValues.Rows[0].Cells[4].Value = 0;
@@ -187,8 +194,8 @@ namespace ParticleReader.View
 
         private void addAcummulativeToLeftRunTree(DataTable information, DataGridView dataGridViewToAddValues)
         {
-            double cumulated = 0;
-            int detectorNumber = 0;
+            double cumulated;
+            int detectorNumber;
             this.addColumnToDatagridView("Run_3 Cumulatives >", dataGridViewToAddValues);
 
             for (int i = 0; i < information.Rows.Count; i++)
@@ -220,10 +227,10 @@ namespace ParticleReader.View
             accumulatedValuesSingleAperture = data.deleteEmptyRowsOfDataTable(accumulatedValuesSingleAperture);
 
             Differential astm95 = new Differential(accumulatedValuesASTM95);
-            DataTable differentialASTM95 = astm95.getDifferentialTable();
+            differentialASTM95 = astm95.getDifferentialTable();
 
             Differential singleAperture = new Differential(accumulatedValuesSingleAperture);
-            DataTable differentialSingleAperture = singleAperture.getDifferentialTable();
+            differentialSingleAperture = singleAperture.getDifferentialTable();
 
             data.addDataTableToDataGridView(differentialASTM95, Dgv_ASTM95_Differential);
             data.addDataTableToDataGridView(differentialSingleAperture, Dgv_Single_Aperture_Differential);
@@ -232,7 +239,15 @@ namespace ParticleReader.View
         private void Btn_Generate_Report_Click(object sender, EventArgs e)
         {
             DataTable sampleInformationForReport = this.serchInformationOfRuns();
-            
+            ObservableCollection<SampleInformation> sampleInformationColection;
+
+            DataForReport dataForReport = new DataForReport(numberOfRuns);
+            sampleInformationColection = dataForReport.getDataOfSampleForReport(sampleInformationForReport);
+            DataTable accumulatedAstm95 = this.getAccumulatedValues(Dgv_ASTM95_Accumulated);
+            DataTable accumulatedSingleAperture = this.getAccumulatedValues(Dgv_Single_Aperture_Accumulated);
+
+            Report_View report = new Report_View(sampleInformationColection, accumulatedAstm95, differentialASTM95, accumulatedSingleAperture, numberOfRuns, differentialSingleAperture);           
+            report.Show();
         }
 
         private DataTable serchInformationOfRuns()
@@ -242,12 +257,12 @@ namespace ParticleReader.View
             information.Columns.Add(new DataColumn("Title", typeof(string)));
             information.Columns.Add(new DataColumn("Value", typeof(string)));
 
-            string cellValue = "";
+            string cellValue;
             int index = 0;
-            for (int i=0; i< sampleInformation.Rows.Count; i++)
+            for (int i = 0; i < sampleInformation.Rows.Count; i++)
             {
                 cellValue = sampleInformation.Rows[i][1].ToString();
-                if( valuesToSerch.Contains(cellValue))
+                if (valuesToSerch.Contains(cellValue))
                 {
                     information.Rows.Add();
                     information.Rows[index]["Title"] = sampleInformation.Rows[i][1].ToString();
@@ -257,5 +272,26 @@ namespace ParticleReader.View
             }
             return information;
         }
+
+        private DataTable getAccumulatedValues(DataGridView dataGridView)
+        {
+            DataTable dataTable = new DataTable();
+
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                dataTable.Columns.Add(column.HeaderText, typeof(string));
+            }
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                DataRow dataRow = dataTable.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dataRow[cell.ColumnIndex] = cell.Value;
+                }
+                dataTable.Rows.Add(dataRow);
+            }
+            return dataTable;
+        }
+
     }
 }

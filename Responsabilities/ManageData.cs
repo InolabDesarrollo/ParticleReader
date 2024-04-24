@@ -52,14 +52,6 @@ namespace ParticleReader.Responsabilities
             return dgvToFill;
         }
 
-        public void addColumnToDatagridView(string headerText, DataGridView dataGridView)
-        {
-            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
-            column.HeaderText = headerText;
-            column.Width = 100;
-            dataGridView.Columns.Add(column);
-        }
-
         public DataTable deleteEmptyRowsOfDataTable(DataTable dataTable)
         {
             for (int i = dataTable.Rows.Count - 1; i >= 0; i--)
@@ -117,6 +109,19 @@ namespace ParticleReader.Responsabilities
                 object[] rowData = row.ItemArray;
                 dataGridView.Rows.Add(rowData);
             }
+        }
+
+
+        private static bool isEmptyRow(DataRow row)
+        {
+            foreach (var item in row.ItemArray)
+            {
+                if (!(item is DBNull) && !string.IsNullOrWhiteSpace(item.ToString()))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
     }
